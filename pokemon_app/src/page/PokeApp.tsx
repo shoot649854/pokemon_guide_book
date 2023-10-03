@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-
 import * as React from 'react';
+
+import { Link } from 'react-router-dom';
+
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -34,7 +36,7 @@ export const fetchPokemon = (): Promise<Pokemon[]> => {
      */
 
     const promise = [];
-    for (let i = 1; i < 150; i++) {
+    for (let i = 1; i < 550; i++) {
         const PokemonLink = `https://pokeapi.co/api/v2/pokemon/${i}`;
         promise.push(fetch(PokemonLink).then((result) => result.json()));
     }
@@ -49,7 +51,7 @@ export const fetchPokemon = (): Promise<Pokemon[]> => {
                 order: data.order,
                 weight: data.weight,
                 image: data.sprites['front_default'],
-                types: data.types.map((typeData: any) => typeData.type.name).join(',        ')
+                types: data.types.map((typeData: any) => typeData.type.name).join(', '),
             }));
         })
         .catch((error) => {
@@ -83,21 +85,23 @@ export const PokeCard: React.FC = () => {
     return (
         <div style={cardContainerStyle}>
             {pokemonList.map((pokemon:any, index:number) => (
-                <Card key={index} sx={{ maxWidth: 345 }}>
-                    <CardMedia
-                        sx={{ height: 140 }}
-                        image={pokemon.image}
-                        title={pokemon.name}
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            {pokemon.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Types: {pokemon.types}
-                        </Typography>
-                    </CardContent>
-                </Card>
+                <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
+                    <Card key={index} sx={{ maxWidth: 345 }}>
+                        <CardMedia
+                            sx={{ height: 140 }}
+                            image={pokemon.image}
+                            title={pokemon.name}
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                {pokemon.name}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Types: {pokemon.types}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Link>
             ))}
         </div>
     );
