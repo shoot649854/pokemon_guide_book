@@ -10,16 +10,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-interface Pokemon {
-    name: string;
-    id: number;
-    base_experience: number;
-    height: number;
-    order: number;
-    weight: number;
-    image: any;
-    types: string[];
-}
+import { Pokemon } from '../type/type';
 
 export const fetchPokemon = (): Promise<Pokemon[]> => {
     /**
