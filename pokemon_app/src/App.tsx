@@ -13,7 +13,7 @@ function App() {
       <Router>
           <Routes>
             <Route path="/" element={<PokeCard />} />
-            <Route path="/pokemon:id" element={<PokeDetail />} />
+            <Route path="/pokemon/:id" element={<PokeDetail />} />
           </Routes>
         </Router>
       </header>
