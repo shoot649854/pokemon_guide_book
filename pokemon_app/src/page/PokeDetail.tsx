@@ -9,21 +9,26 @@ import { Pokemon } from '../type/type';
 export const PokeDetail = () => {
     const { id } = useParams();
     const PokemonLink = `https://pokeapi.co/api/v2/pokemon/${id}`;
-    const [pokemon, setPokemon] = useState<Pokemon[]>([]);
+    const [pokemon, setPokemon] = useState<Pokemon | null>(null); 
 
     useEffect(() => {
-        fetchPokemon().then((pokemonArray) => {
-            setPokemon(pokemonArray);
+        fetchPokemon().then((pokemonData) => {
+            setPokemon(pokemonData[0]);
         });
     }, [id]);
+
+    if (!pokemon) {
+        return <div>Loading...</div>; // Add a loading indicator while fetching data
+    }
+    
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={0}>
         <Grid item xs={12}>
             <Typography variant="h4"> {pokemon.name} </Typography>
-            <Typography variant="subtitle1">No.150</Typography>
+            <Typography variant="subtitle1">No.{pokemon.id}</Typography>
         </Grid>
         <Grid item xs={6}>
-            <img src={pokemon.image} />
+            <img src={pokemon.image} style={{ width: '50%', height: 'auto' }}  />
         </Grid>
         <Grid item xs={6}>
             <table>
@@ -42,8 +47,8 @@ export const PokeDetail = () => {
                 </tr>
             </tbody>
             </table>
-            <img src="https://via.placeholder.com/50x50" alt="Legendary" />
         </Grid>
         </Grid>
     );
 }
+
