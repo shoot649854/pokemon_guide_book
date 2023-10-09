@@ -35,7 +35,7 @@ export const PokeDetail = () => {
             <tbody>
                 <tr>
                 <td>Height:</td>
-                <td>2.0 m</td>
+                <td>3.0 m</td>
                 </tr>
                 <tr>
                 <td>Weight:</td>
