@@ -2,7 +2,7 @@
   "name": "pokemon_app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://shoot649854.github.io/pokemon_app",
+  "homepage": "https://shoot649854.github.io/http:/pokemon_guide_book",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -28,7 +28,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run deploy"
+    "predeploy": "npm run build", 
+    "deploy": "gp-pages -d build"
   },
   "eslintConfig": {
     "extends": [
