@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 
 import { Typography, Grid } from '@mui/material/';
 
-import { fetchPokemon } from './PokeApp';
+// import { fetchPokemon } from './PokeApp';
+import { fetchPokemonData} from './FetchPokemonData';
 import { Pokemon } from '../type/type';
 
 export const PokeDetail = () => {
@@ -11,9 +12,10 @@ export const PokeDetail = () => {
     const PokemonLink = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
+
     useEffect(() => {
-        // Modify the fetchPokemon function to fetch a single Pokemon
-        fetchPokemon(id).then((pokemonData) => {
+        const pokemonId = Number(id) ?? 0; // Convert id to number or use 0 if undefined
+        fetchPokemonData(pokemonId).then((pokemonData) => {
             setPokemon(pokemonData);
         });
     }, [id]);
