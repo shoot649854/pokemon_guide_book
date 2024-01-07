@@ -2,7 +2,7 @@
   "name": "pokemon_app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://shoot649854.github.io/http:/pokemon_guide_book",
+  "homepage": "https://shoot649854.github.io/http:/pokemon_guide_book/public",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
