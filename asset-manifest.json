@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/http:/pokemon_guide_book/public/static/css/main.ba129eb4.css",
-    "main.js": "/http:/pokemon_guide_book/public/static/js/main.52cd652d.js",
-    "static/js/787.a8fe51ff.chunk.js": "/http:/pokemon_guide_book/public/static/js/787.a8fe51ff.chunk.js",
-    "index.html": "/http:/pokemon_guide_book/public/index.html",
-    "main.ba129eb4.css.map": "/http:/pokemon_guide_book/public/static/css/main.ba129eb4.css.map",
-    "main.52cd652d.js.map": "/http:/pokemon_guide_book/public/static/js/main.52cd652d.js.map",
-    "787.a8fe51ff.chunk.js.map": "/http:/pokemon_guide_book/public/static/js/787.a8fe51ff.chunk.js.map"
+    "main.css": "/pokemon_guide_book/static/css/main.ba129eb4.css",
+    "main.js": "/pokemon_guide_book/static/js/main.57c4dd9e.js",
+    "static/js/787.a8fe51ff.chunk.js": "/pokemon_guide_book/static/js/787.a8fe51ff.chunk.js",
+    "index.html": "/pokemon_guide_book/index.html",
+    "main.ba129eb4.css.map": "/pokemon_guide_book/static/css/main.ba129eb4.css.map",
+    "main.57c4dd9e.js.map": "/pokemon_guide_book/static/js/main.57c4dd9e.js.map",
+    "787.a8fe51ff.chunk.js.map": "/pokemon_guide_book/static/js/787.a8fe51ff.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ba129eb4.css",
-    "static/js/main.52cd652d.js"
+    "static/js/main.57c4dd9e.js"
   ]
 }
