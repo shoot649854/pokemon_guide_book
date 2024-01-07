@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/http:/pokemon_guide_book/static/css/main.ba129eb4.css",
+    "main.js": "/http:/pokemon_guide_book/static/js/main.f768987d.js",
+    "static/js/787.a8fe51ff.chunk.js": "/http:/pokemon_guide_book/static/js/787.a8fe51ff.chunk.js",
+    "index.html": "/http:/pokemon_guide_book/index.html",
+    "main.ba129eb4.css.map": "/http:/pokemon_guide_book/static/css/main.ba129eb4.css.map",
+    "main.f768987d.js.map": "/http:/pokemon_guide_book/static/js/main.f768987d.js.map",
+    "787.a8fe51ff.chunk.js.map": "/http:/pokemon_guide_book/static/js/787.a8fe51ff.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ba129eb4.css",
+    "static/js/main.f768987d.js"
+  ]
+}
