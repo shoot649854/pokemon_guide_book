@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 import { Typography, Grid } from '@mui/material/';
 
-// import { fetchPokemon } from './PokeApp';
 import { fetchPokemonData} from './FetchPokemonData';
 import { Pokemon } from '../type/type';
 
@@ -23,7 +22,6 @@ export const PokeDetail = () => {
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
-                {/* Check if pokemon is not null before accessing its properties */}
                 {pokemon && (
                     <>
                         <Typography variant="h4"> {pokemon.name} </Typography>
@@ -32,7 +30,6 @@ export const PokeDetail = () => {
                 )}
             </Grid>
             <Grid item xs={6}>
-                {/* Check if pokemon is not null before accessing its properties */}
                 {pokemon && <img src={pokemon.image} alt={pokemon.name} />}
             </Grid>
             <Grid item xs={6}>
