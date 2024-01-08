@@ -9,7 +9,7 @@ const AppLayout = () => {
     <Box
       sx={{
         backgroundColor: "#F4F1F1",
-        maxHeight: "100vh",
+        minHeight: "100vh",
         margin: "0 auto",
         "@media (max-width: 800px)": {
           minWidth: "960px"

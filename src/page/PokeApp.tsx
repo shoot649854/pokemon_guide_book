@@ -43,9 +43,10 @@ const cardContainerStyle = {
   };
   
   export const PokeCard: React.FC = () => {
+    const NumbersOfPokemonInPage = 40;
     const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [rowsPerPage, setRowsPerPage] = useState(NumbersOfPokemonInPage);
   
     useEffect(() => {
       fetchPokemon(page * rowsPerPage, rowsPerPage).then((pokemonArray) => {
@@ -85,7 +86,7 @@ const cardContainerStyle = {
         </Box>
         <TablePagination
           component="div"
-          count={100} // Set the total number of rows
+          count={100}
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
