@@ -1,118 +1,96 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
-import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Card, CardContent, CardMedia, Typography} from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Box} from '@mui/material';
+import { TablePagination} from '@mui/material/';
+
 
 import { Pokemon } from '../type/type';
 
-export const fetchPokemon = (): Promise<Pokemon[]> => {
-    /**
-     * @description Return information from PokeAPI
-     * @param None
-     * @returns name: data.name,
-                id: data.id,
-                base_experience: data.base_experience,
-                height: data.height,
-                order: data.order,
-                weight: data.weight,
-                image: data.sprites['front_default'],
-                types: data.types,
-     */
-
-    const promise = [];
-    for (let i = 1; i < 550; i++) {
-        const PokemonLink = `https://pokeapi.co/api/v2/pokemon/${i}`;
-        promise.push(fetch(PokemonLink).then((result) => result.json()));
-    }
-
-    return Promise.all(promise)
-        .then((result) => {
-            return result.map((data) => ({
-                name: data.name,
-                id: data.id,
-                base_experience: data.base_experience,
-                height: data.height,
-                order: data.order,
-                weight: data.weight,
-                image: data.sprites['front_default'],
-                types: data.types.map((typeData: any) => typeData.type.name).join(', '),
-            }));
-        })
-        .catch((error) => {
-            console.error("Error fetching data:", error);
-            return []; 
-        });
-}
-
-const cardContainerStyle: React.CSSProperties = {
+const cardContainerStyle = {
     margin: '5% 5% 5% 5%',
     display: 'flex',
-    flexDirection: 'row' as 'row', 
-    flexWrap: 'wrap', 
-    gap: '16px', 
+    flexDirection: 'row' as 'row',
+    flexWrap: 'wrap',
+    gap: '16px',
+  };
+
+  const fetchPokemon = (offset: number, limit: number): Promise<Pokemon[]> => {
+    const promise = [];
+    for (let i = offset + 1; i <= offset + limit; i++) {
+      const PokemonLink = `https://pokeapi.co/api/v2/pokemon/${i}`;
+      promise.push(fetch(PokemonLink).then((result) => result.json()));
+    }
+  
+    return Promise.all(promise)
+      .then((result) => {
+        return result.map((data) => ({
+          name: data.name,
+          id: data.id,
+          base_experience: data.base_experience,
+          height: data.height,
+          order: data.order,
+          weight: data.weight,
+          image: data.sprites['front_default'],
+          types: data.types.map((typeData: any) => typeData.type.name).join(', '),
+        }));
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        return [];
+      });
   };
   
-const cardStyle = {
-    maxWidth: 500,
-    width: 'calc(33.33% - 16px)', 
+  export const PokeCard: React.FC = () => {
+    const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+  
+    useEffect(() => {
+      fetchPokemon(page * rowsPerPage, rowsPerPage).then((pokemonArray) => {
+        setPokemonList(pokemonArray);
+      });
+    }, [page, rowsPerPage]);
+  
+    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+      setPage(newPage);
+    };
+  
+    const handleChangeRowsPerPage = (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    };
+  
+    return (
+      <Box>
+        <Box sx={cardContainerStyle}>
+          {pokemonList.map((pokemon: any, index: number) => (
+            <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
+              <Card key={index} sx={{ maxWidth: 345 }}>
+                <CardMedia sx={{ height: 140 }} image={pokemon.image} title={pokemon.name} />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {pokemon.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Types: {pokemon.types}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </Box>
+        <TablePagination
+          component="div"
+          count={100} // Set the total number of rows
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Box>
+    );
   };
-  
-export const PokeCard: React.FC = () => {
-    const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-
-    useEffect(() => {
-        fetchPokemon().then((pokemonArray) => {
-            setPokemonList(pokemonArray);
-        });
-    }, []);
-    
-    return (
-        <div style={cardContainerStyle}>
-            {pokemonList.map((pokemon:any, index:number) => (
-                <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
-                    <Card key={index} sx={{ maxWidth: 345 }}>
-                        <CardMedia
-                            sx={{ height: 140 }}
-                            image={pokemon.image}
-                            title={pokemon.name}
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                {pokemon.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Types: {pokemon.types}
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Link>
-            ))}
-        </div>
-    );
-}
-  
-function PokemonComponent() {
-    const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-
-    useEffect(() => {
-        fetchPokemon().then((pokemonArray) => {
-            setPokemonList(pokemonArray);
-        });
-    }, []);
-
-    return (
-        <div>
-            <h1>Pokemon List</h1>
-            <ul>
-                {pokemonList.map((pokemon, index) => (
-                    <li key={index}>
-                        <h5>Name: {pokemon.name}</h5>
-                        <img src={pokemon.image} />
-                        <h5>Types: {pokemon.types}</h5>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-}
